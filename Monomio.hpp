@@ -3,6 +3,13 @@
 	\brief Definición de la clase Monomio
 */
 
+/*!
+ \mainpage Implementación de un monomio
+ \brief		\f$ coeficiente X^{grado}\f$
+ \author   Angel Santos Ramírez
+ \version  1.0
+*/
+
 #ifndef _MONOMIO_HPP_
 #define _MONOMIO_HPP_
 
@@ -11,6 +18,7 @@
 
 // Para controlar las pre y post condiciones mediante asertos
 #include <cassert>
+#include <iostream>
 
 #define COTA_ERROR 1.0e-6  //!< Cota de error para la comparación números reales
 
@@ -29,6 +37,17 @@ class Monomio
 	public:
 
 	//! \name Constructores de la clase Monomio
+
+		/**
+		@fn inline Monomio(double coeficiente=0.0,int grado=0)
+		@brief Constructor parametrizado de la clase monomio
+		@param coeficiente=0.0,grado=0
+		@return None
+		@pre El parametro grado es mayor que 0
+		@post El parametro coeficiente es igual que el coeficiente de la clase
+		@post El parametro grado es igual que el grado de la clase
+		*/
+
 		inline Monomio(double coeficiente=0.0,int grado=0){
 			#ifndef NDEBUG
 				assert( grado >= 0);
@@ -41,6 +60,15 @@ class Monomio
 			#endif
 		};
 
+		/**
+		@fn inline Monomio(Monomio const  &m)
+		@brief Constructor de copia de la clase monomio
+		@param Monomio::Monomio
+		@return None
+		@post El coeficiente del monomio pasado es igual que el coeficiente de la clase
+		@post El grado del monomio pasado es igual que el grado de la clase
+		*/
+
 		inline Monomio(Monomio const  &m){
 			coeficiente_=m.coeficiente_;
 			grado_=m.grado_;
@@ -52,10 +80,33 @@ class Monomio
 
 	//! \name Observadores: funciones de consulta de la clase Monomio
 
-		inline const double getCoeficiente(){return coeficiente_;};
-		inline const int getGrado(){return grado_;};
+		/**
+		@fn inline double getCoeficiente()const		
+		@brief Observador del ceficiente de la clase
+		@param None
+		@return Double coeficiente
+		*/
+
+		inline double getCoeficiente()const{return coeficiente_;};
+
+		/**
+		@fn inline int getGrado()const		
+		@brief Observador del grado de la clase
+		@param None
+		@return Int grado
+		*/
+
+		inline int getGrado()const{return grado_;};
 
 	//! \name Funciones de modificación de la clase Monomio
+
+		/**
+		@fn inline void setCoeficiente(double f)		
+		@brief Modificador del coeficiente de la clase
+		@param Double f
+		@return None
+		@post El coeficiente asignado debe ser igual al nuevo coeficiente de la clase
+		*/
 
 		inline void setCoeficiente(double f){
 			coeficiente_=f;
@@ -63,6 +114,15 @@ class Monomio
 			assert(std::abs(coeficiente_-f) < COTA_ERROR);
 			#endif
 		};
+
+		/**
+		@fn inline void setGrado(int g)		
+		@brief Modificador del grado de la clase
+		@param Int g
+		@return None
+		@pre El parametro g deberá ser mayor o igual a 0
+		@post El grado asignado debe ser igual al nuevo grado de la clase
+		*/
 
 		inline void setGrado(int g){
 			#ifndef NDEBUG
@@ -82,38 +142,176 @@ class Monomio
 
 	//! \name Operadores de la clase Monomio
 
-	// Operadores de asignación
 
-		// COMPLETAR LOS COMENTARIOS DE DOXYGEN
+		/**
+		@fn Monomio & operator=(Monomio const &m)	
+		@brief Operador de asignacion de la lase monomio
+		@param Monomio::Monomio const &m
+		@return *this
+		@post El grado asignado del monomio debe ser igual al nuevo grado de la clase
+		@post El coeficiente asignado del monomio debe ser igual al nuevo coeficiente de la clase
+		*/
 		Monomio & operator=(Monomio const &m);
 
-		// COMPLETAR LOS COMENTARIOS DE DOXYGEN
+		/**
+		@fn Monomio & operator=(double const &x)
+		@brief Operador de asignacion de la lase monomio
+		@param double const &x
+		@return *this
+		@post El grado del monomio de la clase deberá ser igual a 0
+		@post El coeficiente asignado por el parámetro debe ser igual al nuevo coeficiente de la clase
+		*/
 		Monomio & operator=(double const &x);
 
-
-	// Operadores aritméticos y asignación
-
-		// COMPLETAR LOS COMENTARIOS DE DOXYGEN
+		/**
+		@fn Monomio & operator+=(Monomio const &m)
+		@brief Operador aritmético que modifica el monomio sumandole otro monomio
+		@param Monomio const &m
+		@return *this
+		@pre Los grados de los dos monomios deben ser iguales
+		@post El grado del monomio no varia
+		@post El coeficiente del monomio es igual a la suma de coeficientes de los monomios
+		*/
 		Monomio & operator+=(Monomio const &m);
 
+		/**
+		@fn Monomio & operator-=(Monomio const &m)
+		@brief Operador aritmético que modifica el monomio restandole otro monomio
+		@param Monomio const &m
+		@return *this
+		@pre Los grados de los dos monomios deben ser iguales
+		@post El grado del monomio no varia
+		@post El coeficiente del monomio es igual a la resta de coeficientes de los monomios
+		*/
+		Monomio & operator-=(Monomio const &m);
 
-		// COMPLETAR EL RESTO DE OPERADORES
+		/**
+		@fn Monomio & operator*=(Monomio const &m)
+		@brief Operador aritmético que modifica el monomio multiplicandole otro monomio
+		@param Monomio const &m
+		@return *this
+		@post El grado del monomio actual es la suma del grado de los dos monomios
+		@post El coeficiente del monomio es igual a la multiplicacion de coeficientes de los monomios
+		*/
+		Monomio & operator*=(Monomio const &m);
+
+		/**
+		@fn Monomio & operator/=(Monomio const &m)
+		@brief Operador aritmético que modifica el monomio dividiendole otro monomio
+		@param Monomio const &m
+		@return *this
+		@pre El grado del monomio de la clase es mayor o igual que el del pasado por parámetro
+		@pre El grado es distinto de 0
+		@post El grado del monomio actual es la resta del grado de los dos monomios
+		@post El coeficiente del monomio es igual a la división de coeficientes de los monomios
+		*/
+		Monomio & operator/=(Monomio const &m);
+
+		/**
+		@fn Monomio & operator*=(double const &c)
+		@brief Operador aritmético que modifica el monomio multiplicandole un número 
+		@param double const &c
+		@return *this
+		@post El grado del monomio actual no se modifica
+		@post El coeficiente del monomio es igual a la multiplicacion del coeficiente del monomio por el número
+		*/
+		Monomio & operator*=(double const &c);
+
+		/**
+		@fn Monomio & operator/=(double const &c)
+		@brief Operador aritmético que modifica el monomio dividiendole un número 
+		@param double const &c
+		@return *this
+		@pre El número pasado es diferente de 0
+		@post El grado del monomio actual no se modifica
+		@post El coeficiente del monomio es igual a la división del coeficiente del monomio entre el número
+		*/
+		Monomio & operator/=(double const &c);
+
+
+
 
 
 	/////////////////////////////////////////////////////////////////////////////////////
 
 	//! \name Funciones lectura y escritura de la clase Monomio
 
-	// COMPLETAR
+		/**
+		@fn void leerMonomio()
+		@brief Funcion que lee un monomio por teclado
+		@param None
+		@return None
+		@post El grado es mayor o igual que 0
+		*/
+
+	void leerMonomio(){
+		int g;
+		double c;
+
+		std::cout<<"Introduzca el coeficiente"<<std::endl;
+		std::cin>>c;
+
+		std::cout<<"Introduzca el grado"<<std::endl;
+		std::cin>>g;
+
+		grado_=g;
+		coeficiente_=c;
+
+		#ifndef NDEBUG
+		assert(grado_ >= 0);
+		#endif
+
+	};
+		/**
+		@fn void escribirMonomio()
+		@brief Escribe el monomio actual por pantalla
+		@param None
+		@return None
+		*/
+	void escribirMonomio(){
+		if(this->getGrado()==0){
+			std::cout<< this->getCoeficiente() <<std::endl;
+		}
+		else{
+			if(this->getGrado()==1){
+				if(this->getCoeficiente() == 1 ){
+				std::cout<<"x"<<std::endl;
+				}
+				if(this->getCoeficiente() == -1 ){
+				std::cout<<"-x"<<std::endl;
+				}
+				else{
+				std::cout<< this->getCoeficiente()<<"x"<<std::endl;
+				}
+			}
+			else{
+				std::cout<< this->getCoeficiente()<<"x^"<<this->getGrado()<<std::endl;
+				if(this->getCoeficiente() == 1 ){
+				std::cout<<"x^"<<this->getGrado()<<std::endl;
+				}
+				if(this->getCoeficiente() == -1 ){
+				std::cout<<"-x^"<<this->getGrado()<<std::endl;
+				}
+			}
+		}
+
+	};
 
 
 	///////////////////////////////////////////////////////////////////////
 
 	//! \name Funciones auxiliares de la clase Monomio
 
-	// COMPLETAR
+		/**
+		@fn double calcularValor(double x)
+		@brief Calcula el valor del monomio asignandole a x un valor
+		@param Double x
+		@return None
+		*/
+	double calcularValor(double x){
 
-
+		return coeficiente_ * ( pow(x,grado_)) ;
+	};
 
 };  // Fin de la definición de la clase Monomio
 

@@ -30,7 +30,10 @@ ed::Monomio & ed::Monomio::operator=(double const &x)
 {
 	this->setCoeficiente(x);
 	this->setGrado(0);
-
+	#ifndef NDEBUG
+	assert(std::abs(this->getCoeficiente() - x) < COTA_ERROR);
+	assert(this->getGrado() == 0);
+	#endif
 	// Se devuelve el objeto actual
 	return *this;
 }
@@ -41,33 +44,123 @@ ed::Monomio & ed::Monomio::operator=(double const &x)
 
 // Operadores aritméticos y asignación
 
-// COMPLETAR
 
 ed::Monomio & ed::Monomio::operator+=(ed::Monomio const &m)
 {
-	// COMPLETAR
+	double aux=this->getCoeficiente();
+	int auxg=this->getGrado();
 
+	#ifndef NDEBUG
+	assert(this->getGrado() == m.grado_);
+	#endif
+
+	this->setCoeficiente(m.coeficiente_+this->getCoeficiente());
+
+	#ifndef NDEBUG
+	assert(std::abs(this->getCoeficiente() - m.coeficiente_) == aux);
+	assert(this->getGrado() == auxg);
+	#endif
 
 	// Se devuelve el objeto actual
 	return *this;
 }
 
+ed::Monomio & ed::Monomio::operator-=(ed::Monomio const &m)
+{
+	double aux=this->getCoeficiente();
+	int auxg=this->getGrado();
 
+	#ifndef NDEBUG
+	assert(this->getGrado() == m.grado_);
+	#endif
 
-// COMPLETAR EL RESTO DE OPERADORES
+	this->setCoeficiente(this->getCoeficiente() - m.coeficiente_);
 
+	#ifndef NDEBUG
+	assert(std::abs(this->getCoeficiente() + m.coeficiente_) == aux);
+	assert(this->getGrado() == auxg);
+	#endif
+	// Se devuelve el objeto actual
+	return *this;
 
+}
 
-///////////////////////////////////////////////////////////////////////
+ed::Monomio & ed::Monomio::operator*=(ed::Monomio const &m)
+{
+	double aux=this->getCoeficiente();
+	int auxg=this->getGrado();
 
-// Funciones lectura y escritura de la clase Monomio
+	this->setCoeficiente(this->getCoeficiente() * m.coeficiente_);
+	this->setGrado(this->getGrado() + m.grado_);
 
-// COMPLETAR
+	#ifndef NDEBUG
+	assert(std::abs(this->getCoeficiente() / m.coeficiente_) == aux);
+	assert(this->getGrado() == auxg + m.grado_);
+	#endif
 
+	// Se devuelve el objeto actual
+	return *this;
 
-///////////////////////////////////////////////////////////////////////
+}
 
-// Funciones auxiliares de la clase Monomio
+ed::Monomio & ed::Monomio::operator/=(ed::Monomio const &m)
+{
+	double aux=this->getCoeficiente();
+	int auxg=this->getGrado();
 
-// COMPLETAR
+	#ifndef NDEBUG
+	assert(this->getGrado() >= m.grado_);
+	assert(m.grado_ != 0);
+	#endif
+
+	this->setGrado(this->getGrado() - m.grado_);
+	this->setCoeficiente(this->getCoeficiente() / m.coeficiente_);
+
+	#ifndef NDEBUG
+	assert(std::abs(this->getCoeficiente() * m.coeficiente_) == aux);
+	assert(auxg == this->getGrado() + m.grado_ );
+	#endif
+
+	// Se devuelve el objeto actual
+	return *this;
+
+}
+
+ed::Monomio & ed::Monomio::operator*=(double const &m)
+{ 
+	double aux= this->getCoeficiente();
+	int auxg=this->getGrado();
+
+	this->setCoeficiente(this->getCoeficiente() * m);
+
+	#ifndef NDEBUG
+	assert(std::abs(this->getCoeficiente() / m) == aux);
+	assert(this->getGrado() == auxg);
+	#endif
+	
+	// Se devuelve el objeto actual
+	return *this;
+
+}
+
+ed::Monomio & ed::Monomio::operator/=(double const &m)
+{ 
+	double aux= this->getCoeficiente();
+	int auxg=this->getGrado();
+
+	#ifndef NDEBUG
+	assert(m != 0);
+	#endif
+
+	this->setCoeficiente(this->getCoeficiente() / m);
+
+	#ifndef NDEBUG
+	assert(std::abs(this->getCoeficiente() * m) == aux);
+	assert(this->getGrado() == auxg);
+	#endif
+	
+	// Se devuelve el objeto actual
+	return *this;
+
+}
 

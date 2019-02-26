@@ -1,6 +1,9 @@
 var searchData=
 [
-  ['place',['PLACE',['../macros_8hpp.html#ad040774f1528e8a40d3c1c525997050f',1,'macros.hpp']]],
-  ['principal_2ecpp',['principal.cpp',['../principal_8cpp.html',1,'']]],
-  ['purple',['PURPLE',['../macros_8hpp.html#a0bb0b009e7a7390473ace4d98bd843c0',1,'macros.hpp']]]
+  ['macros_2ehpp',['macros.hpp',['../macros_8hpp.html',1,'']]],
+  ['main',['main',['../principal_8cpp.html#ae66f6b31b5ad750f1fe042a706a4e3d4',1,'principal.cpp']]],
+  ['menu',['menu',['../funcionesAuxiliares_8hpp.html#a546d1699e6a9b8dd8d3aa52978a38f06',1,'ed']]],
+  ['monomio',['Monomio',['../classed_1_1Monomio.html',1,'ed::Monomio'],['../classed_1_1Monomio.html#a9629c2474279461b0e81724c924d3f26',1,'ed::Monomio::Monomio(double coeficiente=0.0, int grado=0)'],['../classed_1_1Monomio.html#a761273a9cb46d0045e6c096f82c40fe0',1,'ed::Monomio::Monomio(Monomio const &amp;m)']]],
+  ['monomio_2ecpp',['Monomio.cpp',['../Monomio_8cpp.html',1,'']]],
+  ['monomio_2ehpp',['Monomio.hpp',['../Monomio_8hpp.html',1,'']]]
 ];

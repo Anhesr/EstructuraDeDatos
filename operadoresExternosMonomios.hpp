@@ -19,23 +19,71 @@ using std::ostream;
 namespace ed
 {
 //////////////////////////////////////////////////////////////////////////////////////
-	// Operadores externos que no pertenecen a la clase Monomio
 
 	//! \name Operadores de igualdad  
-
-	// COMPLETAR LOS COMENTARIOS DE DOXYGEN
+		/**
+		@fn bool operator==(ed::Monomio const & m1, ed::Monomio const & m2)
+		@brief Operador de igualdad que comprueba si dos monomios son iguales
+		@param ed::Monomio const & m1, ed::Monomio const & m2
+		@return bool
+		@post El valor devuelto es verdadero si son iguales(mismos coeficiente y grado)
+		@post El valor devuelto es falso si son distintos
+		*/
 	bool operator==(ed::Monomio const & m1, ed::Monomio const & m2);
 
+		/**
+		@fn bool operator==(ed::Monomio const & m1, double const & m2)
+		@brief Operador de igualdad que comprueba si el coeficiente de un monomio es igual a un Número
+		@param ed::Monomio const & m1, double const & m2
+		@return bool
+		@post El valor devuelto es verdadero si son iguales el coeficiente y el número, y el grado del monomio es 0
+		@post El valor devuelto es falso si son distintos
+		*/
+	bool operator==(ed::Monomio const & m1, double const & m2);
 
-	// COMPLETAR LOS OTROS OPERADORES DE IGUALDAD
+		/**
+		@fn bool operator==(double const & m2, ed::Monomio const & m1)
+		@brief Operador de igualdad que comprueba si el coeficiente de un monomio es igual a un Número
+		@param double const & m2, ed::Monomio const & m1
+		@return bool
+		@post El valor devuelto es verdadero si son iguales el coeficiente y el número, y el grado del monomio es 0
+		@post El valor devuelto es falso si son distintos
+		*/
+	bool operator==(double const & m2, ed::Monomio const & m1);
 
 
 	//! \name Operadores de desigualdad 
 
-	// COMPLETAR LOS COMENTARIOS DE DOXYGEN
+		/**
+		@fn bool operator!=(ed::Monomio const & m1, ed::Monomio const & m2)
+		@brief Operador de igualdad que comprueba si dos monomios son distintos
+		@param ed::Monomio const & m1, ed::Monomio const & m2
+		@return bool
+		@post El valor devuelto es verdadero si son distintos(mismos coeficiente o grado)
+		@post El valor devuelto es falso si son iguales
+		*/
 	bool operator!=(ed::Monomio const & m1, ed::Monomio const & m2);
 
-	// COMPLETAR LOS OTROS OPERADORES DE DESIGUALDAD
+		/**
+		@fn bool operator!=(ed::Monomio const & m1, double const & m2)
+		@brief Operador de igualdad que comprueba si dos monomios son distintos
+		@param ed::Monomio const & m1, double const & m2
+		@return bool
+		@post El valor devuelto es verdadero si el coeficiente del monimio y el numero son diferentes o el grado es distinto de 0
+		@post El valor devuelto es falso si son iguales
+		*/
+	bool operator!=(ed::Monomio const & m1, double const & m2);
+
+		/**
+		@fn bool operator!=(double const & m2, ed::Monomio const & m1)
+		@brief Operador de igualdad que comprueba si dos monomios son distintos
+		@param double const & m2, ed::Monomio const & m1
+		@return bool
+		@post El valor devuelto es verdadero si el coeficiente del monimio y el numero son diferentes o el grado es distinto de 0
+		@post El valor devuelto es falso si son iguales
+		*/
+	bool operator!=(double const & m2, ed::Monomio const & m1);
+
 
 	///////////////////////////////////////////////////
 
@@ -44,6 +92,7 @@ namespace ed
 	// COMPLETAR LOS COMENTARIOS DE DOXYGEN
 
 	ed::Monomio & operator+(ed::Monomio const & m);
+	ed::Monomio & operator-(ed::Monomio const & m);
 
 	// COMPLETAR EL OTRO OPERADOR UNARIO PREFIJO: resta
 
@@ -56,22 +105,28 @@ namespace ed
 	 ed::Monomio & operator+ (ed::Monomio const &m1, ed::Monomio const &m2);
 
 
+
 	//////////////////////////////////////////////////////////
 	//! \name Operador binario de la resta 
 
-	// COMPLETAR
+	ed::Monomio & operator- (ed::Monomio const &m1, ed::Monomio const &m2);
 
 
 	///////////////////////////////////////////////////////////////////////////
 	//! \name Operadores binarios de la multiplicación 
 
 	// COMPLETAR
+	ed::Monomio & operator*(ed::Monomio const &m1, ed::Monomio const &m2);
+	ed::Monomio & operator*(ed::Monomio const &m1, double const & x);
+	ed::Monomio & operator*(double const & x,ed::Monomio const &m1);
 
 	///////////////////////////////////////////////////////////////////////////
 
 	//! \name Operadores binarios de la división 
 
-	// COMPLETAR
+	ed::Monomio & operator/(ed::Monomio const &m1, ed::Monomio const &m2);
+	ed::Monomio & operator/(ed::Monomio const &m1, double const & x);
+	ed::Monomio & operator/(double const & x,ed::Monomio const &m1);
 
 
 	/////////////////////////////////////////////////////////////////////////////
